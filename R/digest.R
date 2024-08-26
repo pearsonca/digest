@@ -38,7 +38,6 @@ digest <- function(object, algo=c("md5", "sha1", "crc32", "sha256", "sha512",
                    serializeVersion=.getSerializeVersion()) {
 
     algoint <- algo_int[[algo[1]]]
-    errormode <- match.arg(errormode, c("stop", "warn", "silent"))
 
     if (is.null(algoint)) {
         return(.errorhandler(paste0("Did not understand algo=", algo[1]), mode=errormode))  # #nocov
@@ -127,6 +126,7 @@ digest <- function(object, algo=c("md5", "sha1", "crc32", "sha256", "sha512",
 ## utility functions used by digest() and  getVDigest() below
 
 .errorhandler <- function(txt, obj="", mode="stop") {
+    mode <- match.arg(mode, c("stop", "warn", "silent"))
     if (mode == "stop") {                                                                # nocov start
         stop(txt, obj, call.=FALSE)
     } else if (mode == "warn") {

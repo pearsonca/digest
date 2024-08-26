@@ -23,7 +23,6 @@ getVDigest <- function(algo = c("md5", "sha1", "crc32", "sha256", "sha512",
                                 "blake3", "crc32c", "xxh3_64", "xxh3_128"),
                         errormode=c("stop","warn","silent")){
     algo <- algo[1]
-    errormode <- match.arg(errormode, c("stop","warn","silent"))
     algoint <- algo_int[[algo]]
     if (is.null(algoint)) {
       return(.errorhandler(paste0("Did not understand algo=", algo), mode=errormode))  # #nocov
